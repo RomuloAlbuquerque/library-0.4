@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<link href="styles/styles.css" rel="stylesheet">
+	<title>cadastrar</title>
+</head>
+
+
+<body class="bg-primary">
+	<div class="div-body">
+
+		<div class="div-header">
+			<div class="div-title">
+				<h1>Biblioteca Online</h1>
+			</div>
+			<div class="div-container-menu">
+				<div class="div-menu">
+					<h2><a href="create.html">Cadastrar</a></h2>
+				</div>
+				<div class="div-menu">
+					<h2><a href="read.html">Listar</a></h2>
+				</div>
+				<div class="div-menu">
+					<h2><a href="update.html">Atualizar</a></h2>
+				</div>
+				<div class="div-menu">
+					<h2><a href="delete.html">Deletar</a></h2>
+				</div>
+				<div class="div-menu">
+					<h2><a onClick="logoff()" href="index.html">Sair</a></h2>
+				</div>
+			</div>
+
+		</div>
+		<div class="div-main">
+			<div class="div-main-column">
+
+				<div class="div-form">
+					<form action="" id="form-create">
+
+
+						<div>
+							<h6 class="insira-dados">Insira os dados do novo livro</h6>
+						</div>
+
+						<div>
+							<div class="form-group">
+								<label for="title">Título:</label><br>
+								<input type="text" name="title" id="title" class="form-control">
+							</div>
+						</div>
+
+						<div>
+
+							<div class="form-group">
+								<label for="author">Autor:</label><br>
+								<input type="text" name="author" id="author" class="form-control">
+							</div>
+						</div>
+
+						<div>
+
+							<div class="form-group">
+								<label for="description">Descrição:</label><br>
+								<input type="text" name="description" id="description" class="form-control">
+							</div>
+						</div>
+
+						<div>
+							<div class="form-group">
+								<label for="company">Editora:</label><br>
+								<input type="text" name="company" id="company" class="form-control">
+							</div>
+						</div>
+						<br>
+
+
+						<button type="button" class="btn btn-primary" onclick="create()">Salvar</button>
+						<button type="button" class="btn btn-success" onclick="this.form.reset()">Novo</button>
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="div-footer">
+			<p>Developed by Rômulo Albuquerque and Ágatha Albuquerque</p>
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript">
+
+		function logoff() {
+
+			$.ajax({
+				method: "DELETE",
+				url: "http://localhost:8080/library/users/logoff",
+				success: function (response) {
+					alert("Já pegastes o beco!")
+				}
+			}).fail(function (xhr, status, errorThrown) {
+				alert("Erro ao sair: " + xhr.responseText);
+			});
+		}
+	</script>
+
+
+	<script type="text/javascript">
+
+		function create() {
+			var title = $("#title").val();
+			var author = $("#author").val();
+			var description = $("#description").val();
+			var company = $("#company").val();
+
+			$.ajax({
+				method: "POST",
+				url: "http://localhost:8080/library/books/create",
+				data: JSON.stringify({title: title, author: author, description: description, company: company}),
+				contentType: "application/json; charset=utf-8",
+				success: function (response) {
+					alert("Salvo com sucesso!")
+				}
+			}).fail(function (xhr, status, errorThrown) {
+				alert("Erro ao salvar: " + xhr.responseText);
+			});
+		}
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

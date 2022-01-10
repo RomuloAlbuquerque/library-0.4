@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<link href="styles/styles.css" rel="stylesheet">
+	<title>atualizar</title>
+</head>
+
+<body class="bg-primary">
+	<div class="div-body">
+
+		<div class="div-header">
+			<div class="div-title">
+				<h1>Biblioteca Online</h1>
+			</div>
+			<div class="div-container-menu">
+				<div class="div-menu">
+					<h2><a href="create.html">Cadastrar</a></h2>
+				</div>
+				<div class="div-menu">
+					<h2><a href="read.html">Listar</a></h2>
+				</div>
+				<div class="div-menu">
+					<h2><a href="update.html">Atualizar</a></h2>
+				</div>
+				<div class="div-menu">
+					<h2><a href="delete.html">Deletar</a></h2>
+				</div>
+				<div class="div-menu">
+					<h2><a onClick="logoff()" href="index.html">Sair</a></h2>
+				</div>
+			</div>
+
+		</div>
+		<div class="div-main">
+			<div class="div-main-column">
+				<div class="div-table">
+					<div class="div-form-update">
+						<form action="" id="form-find-by-title">
+							<label for="title-to-find" class="col-form-label">Informe o título do livro a ser
+								atualizado:</label>
+							<div class="div-form-flex">
+								<div class="div-input-flex">
+									<div class="mb-3">
+										<input type="text" class="form-control" id="titleToFind">
+									</div>
+								</div>
+								<div class="div-button-flex">
+									<button type="button" class="btn btn-primary"
+										onclick="find()">Pesquisar</button>
+									<button type="button" class="btn btn-primary" onclick="reset()">Limpar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<table class="table" id="find">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th scope="col">Autor</th>
+								<th scope="col">Título</th>
+								<th scope="col">Descrição</th>
+								<th scope="col">Editora</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+
+					<div class="div-form-update">
+						<form action="" id="form-update">
+
+
+							<div>
+								<h6 class="insira-dados">Insira os dados do novo livro</h6>
+							</div>
+
+							<div class="div-form-flex">
+								<div class="div-input-flex-50">
+									<div class="form-group">
+										<label for="title">Título:</label><br>
+										<input type="text" name="title" id="title" class="form-control">
+									</div>
+								</div>
+
+								<div class="div-input-flex-50">
+									<div class="form-group">
+										<label for="author">Autor:</label><br>
+										<input type="text" name="author" id="author" class="form-control">
+									</div>
+								</div>
+							</div>
+
+
+							<div class="div-form-flex">
+								<div class="div-input-flex-50">
+									<div class="form-group">
+										<label for="description">Descrição:</label><br>
+										<input type="text" name="description" id="description" class="form-control">
+									</div>
+								</div>
+
+								<div class="div-input-flex-50">
+									<div class="form-group">
+										<label for="company">Editora:</label><br>
+										<input type="text" name="company" id="company" class="form-control">
+									</div>
+								</div>
+							</div>
+
+							<br>
+
+
+							<button type="button" class="btn btn-primary" onclick="update()">Atualizar</button>
+							<button type="button" class="btn btn-success" onclick="this.form.reset()">Novo</button>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="div-footer">
+			<p>Developed by Rômulo Albuquerque and Ágatha Albuquerque</p>
+		</div>
+
+	</div>
+
+
+
+
+
+	<script type="text/javascript">
+
+		function find() {
+			$(document).ready(function () {
+				var titleToFind = $('#titleToFind').val();
+				$.ajax({
+					method: "GET",
+					url: "http://localhost:8080/library/books/title/" + titleToFind,
+
+					success: function (response) {
+						$('table tbody').html('');
+						$.each(response, function (index, item) {
+							let tr = `
+							<tr>
+								<td> ${item.id} </dt>
+								<td> ${item.title} </dt>
+                                <td> ${item.author} </dt>
+                                <td> ${item.description} </dt>
+                                <td> ${item.company} </dt>
+							</tr>
+						`;
+							$('table tbody').append(tr);
+
+						})
+					},
+					error: function (err) {
+						console.error(err);
+					}
+				}).fail(function (xhr, status, errorThrown) {
+				alert("Erro: " + xhr.responseText);
+			});
+			});
+		}
+
+		function update() {
+			$(document).ready(function () {
+				var titleToFind = $('#titleToFind').val();
+				
+				var title = $("#title").val();
+				var author = $("#author").val();
+				var description = $("#description").val();
+				var company = $("#company").val();
+
+				$.ajax({
+					method: "PUT",
+					url: "http://localhost:8080/library/books/update/" + titleToFind,
+					data: JSON.stringify({title: title, author: author, description: description, company: company}),
+					contentType: "application/json; charset=utf-8",
+					success: function (response) {
+						alert("Atualizado com sucesso!")
+					}
+				}).fail(function (xhr, status, errorThrown) {
+					alert("Erro: " + xhr.responseText);
+				});
+			})
+
+		}
+
+		function logoff() {
+
+			$.ajax({
+				method: "DELETE",
+				url: "http://localhost:8080/library/users/logoff",
+				success: function (response) {
+					alert("Já pegastes o beco!")
+				}
+			}).fail(function (xhr, status, errorThrown) {
+				alert("Erro ao sair: " + xhr.responseText);
+			});
+		}
+		
+	</script>
+		
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
