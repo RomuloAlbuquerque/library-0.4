@@ -25,22 +25,8 @@
 			<div class="div-subtitle">
 				<p>Sistema Gerenciador de Biblioteca</p>
 			</div>
-			<div class="div-container-menu">
-				<div class="div-menu">
-					<h2><a href="create.html">Cadastrar</a></h2>
-				</div>
-				<div class="div-menu">
-					<h2><a href="read.html">Listar</a></h2>
-				</div>
-				<div class="div-menu">
-					<h2><a href="update.html">Atualizar</a></h2>
-				</div>
-				<div class="div-menu">
-					<h2><a href="delete.html">Deletar</a></h2>
-				</div>
-				<div class="div-menu">
-					<h2><a onClick="logoff()" href="index.html">Sair</a></h2>
-				</div>
+			<div class="div-title-h3">
+				<h3>Faz Teu Cadastro</h3>
 			</div>
 
 		</div>
@@ -48,42 +34,38 @@
 			<div class="div-main-column">
 
 				<div class="div-form">
-					<form action="create.html" id="form-create">
-
+					<form action="" id="form-create">
 
 						<div>
-							<h6 class="insira-dados">Insira os dados do novo livro</h6>
+							<h6 class="insira-dados">Coloca Teus Dados</h6>
 						</div>
 
 						<div>
 							<div class="form-group">
-								<label for="title">Título:</label><br>
-								<input type="text" name="title" id="title" class="form-control">
+								<label for="name">Teu nome completo:</label><br>
+								<input type="text" name="name" id="name" class="form-control">
 							</div>
 						</div>
-
-						<div>
-
-							<div class="form-group">
-								<label for="author">Autor:</label><br>
-								<input type="text" name="author" id="author" class="form-control">
-							</div>
-						</div>
-
-						<div>
-
-							<div class="form-group">
-								<label for="description">Descrição:</label><br>
-								<input type="text" name="description" id="description" class="form-control">
-							</div>
-						</div>
-
 						<div>
 							<div class="form-group">
-								<label for="company">Editora:</label><br>
-								<input type="text" name="company" id="company" class="form-control">
+								<label for="email">Teu e-mail:</label><br>
+								<input type="email" name="email" id="email" class="form-control">
 							</div>
 						</div>
+						<div>
+							<div class="form-group">
+								<label for="password">Tua senha:</label><br>
+								<input type="password" name="password" id="password" class="form-control">
+							</div>
+						</div>
+						<div>
+							<div class="form-group">
+								<label for="password">Repete a tua senha:</label><br>
+								<input type="password" name="password" id="password" class="form-control">
+							</div>
+						</div>
+
+
 						<br>
 
 
@@ -123,24 +105,23 @@
 	<script type="text/javascript">
 
 		function create() {
-			var title = $("#title").val();
-			var author = $("#author").val();
-			var description = $("#description").val();
-			var company = $("#company").val();
+			var name = $("#name").val();
+			var email = $("#email").val();
+			var password = $("#password").val();
 
 			$.ajax({
 				method: "POST",
-				url: "http://localhost:8080/library/books/create",
-				data: JSON.stringify({title: title, author: author, description: description, company: company}),
+				url: "http://localhost:8080/library/users/create-client",
+				data: JSON.stringify({name: name, email: email, password: password}),
 				contentType: "application/json; charset=utf-8",
 				success: function (response) {
-					alert("DEU BOM! TU SALVASTES.")
+					alert("BELEZA! AGORA TU TENS CADASTRO!");
+					window.location.replace("login.html");
 				}
 			}).fail(function (xhr, status, errorThrown) {
-				alert("Erro ao salvar: " + xhr.responseText);
+				alert("Eita! Deu ruim na hora de salvar: " + xhr.responseText);
 			});
 		}
-		
 	</script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"

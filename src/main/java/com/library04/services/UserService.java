@@ -19,13 +19,22 @@ public class UserService {
 	private UserRepository repository;
 
 	@Transactional
-	public UserDTO insert(UserDTO dto) {
+	public UserDTO create(UserDTO dto) {
 		User entity = new User();
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}
-
+	
+	@Transactional
+	public UserDTO createClient(UserDTO dto) {
+		User entity = new User();
+		copyDtoToEntity(dto, entity);
+		entity.setProfile("client");
+		entity = repository.save(entity);
+		return new UserDTO(entity);
+	}
+	
 	@Transactional
 	public List<UserDTO> read() {
 		List<User> entityList = new ArrayList<>();
@@ -86,17 +95,17 @@ public class UserService {
 	}
 
 	@Transactional
-	public Boolean login(String email, String password) {
-		Boolean auth = false;
+	public String login(String email, String password) {
+		String auth = "not";
 		Optional<User> user = repository.findOptionalByEmail(email);
 		if (!user.isPresent()) {
-			auth = false;
+			auth = "E-mail Inválido";
 		}else
 		if (!user.get().getPassword().equals(password)) {
-			auth = false;
+			auth = "Senha Inválida";
 		}else
 		if (user.get().getPassword().equals(password)) {
-			auth = true;
+			auth = "OK";
 		}
 		return auth;
 	}

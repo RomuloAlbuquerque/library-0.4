@@ -31,8 +31,15 @@ public class UserResource {
 	private ProfileService profileService;
 
 	@PostMapping("/create")
-	public ResponseEntity<UserDTO> insert(@RequestBody UserDTO dto) {
-		UserDTO newDto = service.insert(dto);
+	public ResponseEntity<UserDTO> create(@RequestBody UserDTO dto) {
+		UserDTO newDto = service.create(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
+		return ResponseEntity.created(uri).body(newDto);
+	}
+	
+	@PostMapping("/create-client")
+	public ResponseEntity<UserDTO> createClient(@RequestBody UserDTO dto) {
+		UserDTO newDto = service.createClient(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
 		return ResponseEntity.created(uri).body(newDto);
 	}
@@ -79,14 +86,15 @@ public class UserResource {
 
 	@PostMapping(value = "/login")
 	public ResponseEntity<?> login(@RequestBody UserDTO dto) {
-		Boolean auth = service.login(dto.getEmail(), dto.getPassword());
+		String auth = service.login(dto.getEmail(), dto.getPassword());
 		UserDTO dtoAuth = new UserDTO();
-		if (auth == true) {
+		if (auth == "OK") {
 			dtoAuth = service.findEntityByEmail(dto.getEmail());
 			profileService.profileLog(dtoAuth.getId() ,dtoAuth.getEmail(), dtoAuth.getProfile());
 			return ResponseEntity.ok(dtoAuth.getName());
-		} else {
-			return ResponseEntity.badRequest().body("Email e/ou senha inválido(s)");
+		}
+		else {
+			return ResponseEntity.badRequest().body(auth);
 		}
 	}
 	

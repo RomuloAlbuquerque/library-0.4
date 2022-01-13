@@ -19,7 +19,10 @@
 
 		<div class="div-header">
 			<div class="div-title">
-				<h1>Biblioteca Online</h1>
+				<h1>Library</h1>
+			</div>
+			<div class="div-subtitle">
+				<p>Sistema Gerenciador de Biblioteca</p>
 			</div>
 			<div class="div-container-menu">
 				<div class="div-menu">
@@ -44,7 +47,7 @@
 			<div class="div-main-column">
 				<div class="div-table">
 					<div class="div-form-update">
-						<form action="" id="form-find-by-title">
+						<form action="delete.html" method="" id="form-find-by-title">
 							<label for="title-to-find" class="col-form-label">Informe o título do livro a ser
 								deletado:</label>
 							<div class="div-form-flex">
@@ -58,8 +61,7 @@
 									<button type="button" class="btn btn-primary" onclick="reset()">Limpar</button>
 								</div>
 							</div>
-						</form>
-					</div>
+					
 
 					<table class="table" id="find">
 						<thead>
@@ -74,9 +76,12 @@
 						<tbody>
 
 						</tbody>
+						<button type="button" class="btn btn-warning" onclick="resetTable()">Limpar Tabela</button>
 					</table>
 
-					<button type="button" class="btn btn-danger" onclick="del()">Deletar</button>
+					<a href="delete.html"><button type="button" class="btn btn-danger" onclick="del()">Deletar</button></a>
+					</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -116,8 +121,8 @@
 						console.error(err);
 					}
 				}).fail(function (xhr, status, errorThrown) {
-				alert("Erro: " + xhr.responseText);
-			});
+					alert("Erro: " + xhr.responseText);
+				});
 			});
 		}
 
@@ -130,13 +135,26 @@
 					url: "http://localhost:8080/library/books/delete/" + titleToFind,
 
 					success: function (response) {
-						alert("VOCÊ DELETOU UMA PARADA AÍ!")
+						alert("TU DELETASTES UMA PARADA AÍ!")
 					}
 				}).fail(function (xhr, status, errorThrown) {
 					alert("Erro ao deletar: " + xhr.responseText);
 				});
 			})
 
+		}
+
+		function resetTable() {
+			$(document).ready(function () {
+				$.ajax({
+					success: function (response) {
+						$('table tbody').html('');
+					},
+					error: function (err) {
+						console.error(err);
+					}
+				})
+			});
 		}
 	</script>
 

@@ -19,7 +19,10 @@
 
 		<div class="div-header">
 			<div class="div-title">
-				<h1>Biblioteca Online</h1>
+				<h1>Library</h1>
+			</div>
+			<div class="div-subtitle">
+				<p>Sistema Gerenciador de Biblioteca</p>
 			</div>
 			<div class="div-container-menu">
 				<div class="div-menu">
@@ -54,8 +57,7 @@
 									</div>
 								</div>
 								<div class="div-button-flex">
-									<button type="button" class="btn btn-primary"
-										onclick="find()">Pesquisar</button>
+									<button type="button" class="btn btn-primary" onclick="find()">Pesquisar</button>
 									<button type="button" class="btn btn-primary" onclick="reset()">Limpar</button>
 								</div>
 							</div>
@@ -75,6 +77,7 @@
 						<tbody>
 
 						</tbody>
+						<button type="button" class="btn btn-warning" onclick="resetTable()">Limpar Tabela</button>
 					</table>
 
 					<div class="div-form-update">
@@ -169,15 +172,15 @@
 						console.error(err);
 					}
 				}).fail(function (xhr, status, errorThrown) {
-				alert("Erro: " + xhr.responseText);
-			});
+					alert("Erro: " + xhr.responseText);
+				});
 			});
 		}
 
 		function update() {
 			$(document).ready(function () {
 				var titleToFind = $('#titleToFind').val();
-				
+
 				var title = $("#title").val();
 				var author = $("#author").val();
 				var description = $("#description").val();
@@ -210,9 +213,22 @@
 				alert("Erro ao sair: " + xhr.responseText);
 			});
 		}
-		
+
+		function resetTable() {
+			$(document).ready(function () {
+				$.ajax({
+					success: function (response) {
+						$('table tbody').html('');
+					},
+					error: function (err) {
+						console.error(err);
+					}
+				})
+			});
+		}
+
 	</script>
-		
+
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

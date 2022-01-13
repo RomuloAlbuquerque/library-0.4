@@ -83,7 +83,7 @@ public class BookResource {
 					return ResponseEntity.ok().body(newDto);
 				} else {
 					return ResponseEntity.badRequest()
-							.body("Você não tem permissão para modificar os dados deste livro");
+							.body("Você não é ADMINISTRADOR. Seu perfil é de CLIENTE, você só tem permissão para atualizar livros que você mesmo cadastrou!");
 				}
 			} else {
 				BookDTO newDto = service.updateByTitle(title, dto);
@@ -128,7 +128,7 @@ public class BookResource {
 					service.delete(title);
 					return ResponseEntity.noContent().build();
 				} else {
-					return ResponseEntity.badRequest().body("Você não tem permissão para deletar este livro");
+					return ResponseEntity.badRequest().body("Você não é ADMINISTRADOR. Seu perfil é de CLIENTE, você só tem permissão para deletar livros que você mesmo cadastrou!");
 				}
 			} else {
 				service.delete(title);
