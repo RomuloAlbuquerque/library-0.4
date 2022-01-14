@@ -46,53 +46,55 @@
 		</div>
 		<div class="div-main">
 			<div class="div-main-column">
+				<div class="div-form-update">
+					<div class="div-form">
+						<form action="create.html" id="form-create">
 
-				<div class="div-form">
-					<form action="create.html" id="form-create">
 
-
-						<div>
-							<h6 class="insira-dados">Insira os dados do novo livro</h6>
-						</div>
-
-						<div>
-							<div class="form-group">
-								<label for="title">Título:</label><br>
-								<input type="text" name="title" id="title" class="form-control">
+							<div>
+								<h6 class="insira-dados">Insira os dados do novo livro</h6>
 							</div>
-						</div>
 
-						<div>
-
-							<div class="form-group">
-								<label for="author">Autor:</label><br>
-								<input type="text" name="author" id="author" class="form-control">
+							<div>
+								<div class="form-group">
+									<label for="title">Título:</label><br>
+									<input type="text" name="title" id="title" class="form-control">
+								</div>
 							</div>
-						</div>
 
-						<div>
+							<div>
 
-							<div class="form-group">
-								<label for="description">Descrição:</label><br>
-								<input type="text" name="description" id="description" class="form-control">
+								<div class="form-group">
+									<label for="author">Autor:</label><br>
+									<input type="text" name="author" id="author" class="form-control">
+								</div>
 							</div>
-						</div>
 
-						<div>
-							<div class="form-group">
-								<label for="company">Editora:</label><br>
-								<input type="text" name="company" id="company" class="form-control">
+							<div>
+
+								<div class="form-group">
+									<label for="description">Descrição:</label><br>
+									<input type="text" name="description" id="description" class="form-control">
+								</div>
 							</div>
-						</div>
-						<br>
+
+							<div>
+								<div class="form-group">
+									<label for="company">Editora:</label><br>
+									<input type="text" name="company" id="company" class="form-control">
+								</div>
+							</div>
+							<br>
 
 
-						<button type="button" class="btn btn-primary" onclick="create(); this.form.reset()">Salvar</button>
-						<!--button type="button" class="btn btn-success" onclick="this.form.reset()">Novo</button-->
+							<button type="button" class="btn btn-primary"
+								onclick="create(); this.form.reset()">Salvar</button>
+							<!--button type="button" class="btn btn-success" onclick="this.form.reset()">Novo</button-->
 
-					</form>
+						</form>
+					</div>
+
 				</div>
-
 			</div>
 		</div>
 
@@ -140,7 +142,7 @@
 				alert("Erro ao salvar: " + xhr.responseText);
 			});
 		}
-		
+
 	</script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"

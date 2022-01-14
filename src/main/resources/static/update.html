@@ -45,89 +45,92 @@
 		</div>
 		<div class="div-main">
 			<div class="div-main-column">
-				<div class="div-table">
-					<div class="div-form-update">
-						<form action="" id="form-find-by-title">
-							<label for="title-to-find" class="col-form-label">Informe o título do livro a ser
-								atualizado:</label>
-							<div class="div-form-flex">
-								<div class="div-input-flex">
-									<div class="mb-3">
-										<input type="text" class="form-control" id="titleToFind">
+				<div class="div-form-update">
+					<div class="div-table">
+						<div class="div-form-update">
+							<form action="" id="form-find-by-title">
+								<label for="title-to-find" class="col-form-label">Informe o título do livro a ser
+									atualizado:</label>
+								<div class="div-form-flex">
+									<div class="div-input-flex">
+										<div class="mb-3">
+											<input type="text" class="form-control" id="titleToFind">
+										</div>
+									</div>
+									<div class="div-button-flex">
+										<button type="button" class="btn btn-primary"
+											onclick="find()">Pesquisar</button>
+										<button type="button" class="btn btn-primary" onclick="reset()">Limpar</button>
 									</div>
 								</div>
-								<div class="div-button-flex">
-									<button type="button" class="btn btn-primary" onclick="find()">Pesquisar</button>
-									<button type="button" class="btn btn-primary" onclick="reset()">Limpar</button>
+							</form>
+						</div>
+
+						<table class="table" id="find">
+							<thead>
+								<tr>
+									<th scope="col">Id</th>
+									<th scope="col">Autor</th>
+									<th scope="col">Título</th>
+									<th scope="col">Descrição</th>
+									<th scope="col">Editora</th>
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+							<button type="button" class="btn btn-warning" onclick="resetTable()">Limpar Tabela</button>
+						</table>
+
+						<div class="div-form-update">
+							<form action="" id="form-update">
+
+
+								<div>
+									<h6 class="insira-dados">Insira os dados do novo livro</h6>
 								</div>
-							</div>
-						</form>
-					</div>
 
-					<table class="table" id="find">
-						<thead>
-							<tr>
-								<th scope="col">Id</th>
-								<th scope="col">Autor</th>
-								<th scope="col">Título</th>
-								<th scope="col">Descrição</th>
-								<th scope="col">Editora</th>
-							</tr>
-						</thead>
-						<tbody>
-
-						</tbody>
-						<button type="button" class="btn btn-warning" onclick="resetTable()">Limpar Tabela</button>
-					</table>
-
-					<div class="div-form-update">
-						<form action="" id="form-update">
-
-
-							<div>
-								<h6 class="insira-dados">Insira os dados do novo livro</h6>
-							</div>
-
-							<div class="div-form-flex">
-								<div class="div-input-flex-50">
-									<div class="form-group">
-										<label for="title">Título:</label><br>
-										<input type="text" name="title" id="title" class="form-control">
+								<div class="div-form-flex">
+									<div class="div-input-flex-50">
+										<div class="form-group">
+											<label for="title">Título:</label><br>
+											<input type="text" name="title" id="title" class="form-control">
+										</div>
 									</div>
-								</div>
 
-								<div class="div-input-flex-50">
-									<div class="form-group">
-										<label for="author">Autor:</label><br>
-										<input type="text" name="author" id="author" class="form-control">
-									</div>
-								</div>
-							</div>
-
-
-							<div class="div-form-flex">
-								<div class="div-input-flex-50">
-									<div class="form-group">
-										<label for="description">Descrição:</label><br>
-										<input type="text" name="description" id="description" class="form-control">
+									<div class="div-input-flex-50">
+										<div class="form-group">
+											<label for="author">Autor:</label><br>
+											<input type="text" name="author" id="author" class="form-control">
+										</div>
 									</div>
 								</div>
 
-								<div class="div-input-flex-50">
-									<div class="form-group">
-										<label for="company">Editora:</label><br>
-										<input type="text" name="company" id="company" class="form-control">
+
+								<div class="div-form-flex">
+									<div class="div-input-flex-50">
+										<div class="form-group">
+											<label for="description">Descrição:</label><br>
+											<input type="text" name="description" id="description" class="form-control">
+										</div>
+									</div>
+
+									<div class="div-input-flex-50">
+										<div class="form-group">
+											<label for="company">Editora:</label><br>
+											<input type="text" name="company" id="company" class="form-control">
+										</div>
 									</div>
 								</div>
-							</div>
 
-							<br>
+								<br>
 
 
-							<button type="button" class="btn btn-primary" onclick="update()">Atualizar</button>
-							<button type="button" class="btn btn-success" onclick="this.form.reset()">Novo</button>
+								<button type="button" class="btn btn-primary" onclick="update()">Atualizar</button>
+								<button type="button" class="btn btn-success" onclick="this.form.reset()">Novo</button>
 
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

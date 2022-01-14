@@ -45,23 +45,25 @@
 		</div>
 		<div class="div-main">
 			<div class="div-main-column">
-				<div class="div-table">
-					<button type="button" class="btn btn-primary" onclick="read()">Buscar</button>
-					<table class="table" id="read">
-						<thead>
-							<tr>
-								<th scope="col">Id</th>
-								<th scope="col">Título</th>
-								<th scope="col">Author</th>
-								<th scope="col">Descrição</th>
-								<th scope="col">Editora</th>
-							</tr>
-						</thead>
-						<tbody>
+				<div class="div-form-update">
+					<div class="div-table">
+						<button type="button" class="btn btn-primary" onclick="read()">Buscar</button>
+						<table class="table" id="read">
+							<thead>
+								<tr>
+									<th scope="col">Id</th>
+									<th scope="col">Título</th>
+									<th scope="col">Author</th>
+									<th scope="col">Descrição</th>
+									<th scope="col">Editora</th>
+								</tr>
+							</thead>
+							<tbody>
 
-						</tbody>
-						<button type="button" class="btn btn-warning" onclick="resetTable()">Limpar Tabela</button>
-					</table>
+							</tbody>
+							<button type="button" class="btn btn-warning" onclick="resetTable()">Limpar Tabela</button>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -105,7 +107,7 @@
 				});
 			});
 		}
-		
+
 		function resetTable() {
 			$(document).ready(function () {
 				$.ajax({
